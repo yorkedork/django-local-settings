@@ -92,6 +92,8 @@ class Loader(Base):
         elif isinstance(v, Mapping):
             for k in v:
                 v[k] = self._do_interpolation(v[k], settings)
+        elif isinstance(v, tuple):
+            v = tuple([self._do_interpolation(item, settings) for item in v])
         elif isinstance(v, Sequence):
             for i, item in enumerate(v):
                 v[i] = self._do_interpolation(item, settings)
